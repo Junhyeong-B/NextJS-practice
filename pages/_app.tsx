@@ -1,5 +1,5 @@
 import React from "react";
-import NavBar from "../components/NavBar";
+import Layout from "../components/Layout";
 
 type AppProps = {
   Component: React.FC;
@@ -7,14 +7,8 @@ type AppProps = {
 
 export default function App({ Component, ...Props }: AppProps) {
   return (
-    <>
-      <NavBar />
+    <Layout>
       <Component {...Props} />
-      <style jsx global>{`
-        a {
-          color: salmon;
-        }
-      `}</style>
-    </>
+    </Layout>
   );
 }
