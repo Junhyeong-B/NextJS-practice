@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Seo from "../components/Seo";
 
@@ -23,11 +24,27 @@ type HomeProps = {
 };
 
 export default function Home({ results }: HomeProps): JSX.Element {
+  const router = useRouter();
+  const onClick = (id: number, title: string) => {
+    router.push(
+      {
+        pathname: `/movies/${id}`,
+        query: {
+          title,
+        },
+      },
+      `/movies/${id}`
+    );
+  };
   return (
     <div className="container">
       <Seo title="Home" />
       {results?.map((movie) => (
-        <div className="movie" key={movie.id}>
+        <div
+          className="movie"
+          key={movie.id}
+          onClick={() => onClick(movie.id, movie.original_title)}
+        >
           {/* eslint-disable-next-line */}
           <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} />
           <h4>{movie.original_title}</h4>
